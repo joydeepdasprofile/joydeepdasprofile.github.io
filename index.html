@@ -1,249 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to Joydeep Das' homepage">
-    <title>Joydeep Das</title>
-    <style>
-        body {
-            background-color: #001f3f; /* Dark blue color */
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start; /* Align items to the left */
-            color: white;
-        }
-
-        nav {
-            background-color: #003366; /* Darker blue for nav */
-            width: 100%;
-            padding: 10px 0;
-            text-align: center;
-        }
-
-        nav a {
-            color: white; /* White text for nav links */
-            text-decoration: none;
-            margin: 0 15px;
-        }
-
-        nav a:hover {
-            text-decoration: underline; /* Underline on hover */
-        }
-
-        .header {
-            display: flex;
-            align-items: center; /* Align items center vertically */
-            margin-top: 50px;
-        }
-
-        h1 {
-            font-size: 48px;
-            margin-right: 20px;
-        }
-
-        .image-container {
-            position: relative;
-            margin-left: auto; /* Push image to the right */
-        }
-
-        img {
-            width: 150px;
-            height: auto;
-            border-radius: 75px;
-            border: 3px solid white;
-        }
-
-        .section {
-            padding: 20px;
-            max-width: 600px;
-            margin-top: 20px;
-            width: 100%; /* Full width */
-            position: relative;
-        }
-
-        .section::after {
-            content: "";
-            display: block;
-            height: 4px;
-            background-color: white;
-            position: relative;
-            margin-top: 20px; /* Add margin to create space */
-            width: 100%; /* Full width of separator */
-        }
-
-        h2 {
-            margin-bottom: 15px;
-            text-align: left; /* Left align headings */
-        }
-
-        p {
-            font-size: 18px;
-            line-height: 1.5;
-            text-align: left; /* Left align paragraphs */
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-            text-align: left; /* Left align list items */
-        }
-
-        li {
-            font-size: 18px;
-            margin: 5px 0;
-        }
-
-        .achievement-item {
-            margin: 20px 0;
-            text-align: left; /* Left align achievement items */
-        }
-
-        .achievement-image {
-            width: 100%;
-            max-width: 200px;
-            height: auto;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            cursor: pointer; /* Pointer cursor on hover */
-        }
-
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            background-color: rgba(0, 0, 0, 0.8); /* Black background with opacity */
-            justify-content: center; /* Center the modal */
-            align-items: center; /* Center the modal */
-        }
-
-        .modal img {
-            max-width: 90%; /* Limit image size */
-            max-height: 90%; /* Limit image size */
-            border-radius: 5px;
-        }
-
-        .contact {
-            width: 100%; /* Full width */
-            max-width: 600px; /* Set max width for consistency */
-            margin-top: 20px;
-        }
-
-        .social-links {
-            margin-top: 15px;
-        }
-
-        .social-links a {
-            color: #0077B5; /* LinkedIn blue color */
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        .social-links a:hover {
-            text-decoration: underline; /* Underline on hover */
-        }
-
-        footer {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #003366; /* Footer background */
-            color: white;
-            width: 100%;
-            text-align: center; /* Center aligned footer text */
-        }
-    </style>
+    <title>Your Name - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <nav>
-        <a href="#about">About</a>
-        <a href="#publications">Publications</a>
-        <a href="#achievements">Achievements</a>
-        <a href="#contact">Contact</a>
-    </nav>
+    <main>
+        <section id="hero">
+            <h1>Hello, I'm [Your Name]</h1>
+            <p>A brief introduction about yourself.</p>
+            <a href="#contact" class="btn">Get in Touch</a>
+        </section>
 
-    <div class="header">
-        <h1>Joydeep Das</h1>
-        <div class="image-container">
-            <img src="/joydeep.github.io/docs/assets/Images/Joydeep_Das.jpeg" alt="Joydeep Das">
-        </div>
-    </div>
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Write a short paragraph about your background, education, and interests.</p>
+        </section>
 
-    <div class="section about" id="about">
-        <h2>About Joydeep</h2>
-        <p>
-            Joydeep is a results-driven Technical Product/Project Management professional with 20+ years of experience in leading cross-functional teams and overseeing complex data storage and compute platform hardware and systems software engineering projects.
-            Joydeep has a strong background in technical project and product management, engineering development and product validation.
-        </p>
-        <p>
-            Apart from his professional commitment, Joydeep also regularly perticipat in various technical and product management panel discussions alomg with publishing scholarly articles on computer server and data storage platforms. Joydeep also perticipate as a judge in various technology awards.
-        </p>
-    </div>
+        <section id="skills">
+            <h2>Skills</h2>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>React</li>
+                <li>Node.js</li>
+                <!-- Add more skills as needed -->
+            </ul>
+        </section>
 
-    <div class="section publications" id="publications">
-        <h2>Papers Published by Joydeep</h2>
-        <ul>
-            <li>Paper 1: Computational Storage Reference Architecture. <a href="/joydeep.github.io/docs/assets/Papers/Techcon-2020-Computational-Storage.pdf">Read More</a></li>
-            <li>Paper 2: Title of the second paper. <a href="link-to-paper2.com">Read More</a></li>
-            <li>Paper 3: Title of the third paper. <a href="link-to-paper3.com">Read More</a></li>
-            <li>Paper 4: Title of the fourth paper. <a href="link-to-paper4.com">Read More</a></li>
-        </ul>
-    </div>
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="project">
+                <h3>Project Title 1</h3>
+                <p>Short description of project 1.</p>
+                <a href="#" class="btn">View Project</a>
+            </div>
+            <div class="project">
+                <h3>Project Title 2</h3>
+                <p>Short description of project 2.</p>
+                <a href="#" class="btn">View Project</a>
+            </div>
+            <!-- Add more projects as needed -->
+        </section>
 
-    <div class="section achievements" id="achievements">
-        <h2>Achievements</h2>
-        <div class="achievement-item">
-            <img src="/joydeep.github.io/docs/assets/Images/Joydeep_Resume.jpg" alt="Achievement 1" class="achievement-image" onclick="openModal('/joydeep.github.io/docs/assets/Images/Joydeep_Resume.jpg')">
-            <p>Joydeep's Resume. <a href="/joydeep.github.io/docs/assets/Awards/Joydeep_Das.pdf">Read More</a></p>
-        </div>
-        <div class="achievement-item">
-            <img src="path-to-achievement-image2.jpg" alt="Achievement 2" class="achievement-image" onclick="openModal('path-to-achievement-image2.jpg')">
-            <p>Achievement 2: Description of the second achievement. <a href="link-to-pdf2.pdf">View PDF</a></p>
-        </div>
-        <div class="achievement-item">
-            <img src="path-to-achievement-image3.jpg" alt="Achievement 3" class="achievement-image" onclick="openModal('path-to-achievement-image3.jpg')">
-            <p>Achievement 3: Description of the third achievement. <a href="link-to-pdf3.pdf">View PDF</a></p>
-        </div>
-    </div>
-
-    <div class="section contact" id="contact">
-        <h2>Connect with Joydeep</h2>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/professionalprofilejoydeep/" target="_blank">LinkedIn</a>
-        </div>
-    </div>
-
-    <!-- Modal for displaying expanded images -->
-    <div class="modal" id="imageModal" onclick="closeModal(event)">
-        <img id="modalImage" src="" alt="Expanded Image">
-    </div>
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </section>
+    </main>
 
     <footer>
-        <p>© 2025 Joydeep Das. All rights reserved.</p>
-        <p>Contact: <a href="mailto:joydeep1977@gmail.com" style="color: white; text-decoration: none;">E-Mail Joydeep Here</a></p>
+        <p>&copy; 2023 Your Name. All Rights Reserved.</p>
     </footer>
 
-    <script>
-        function openModal(imageSrc) {
-            document.getElementById("modalImage").src = imageSrc;
-            document.getElementById("imageModal").style.display = "flex"; // Show modal
-        }
-
-        function closeModal(event) {
-            if (event.target === document.getElementById("imageModal")) {
-                document.getElementById("imageModal").style.display = "none"; // Hide modal
-            }
-        }
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
