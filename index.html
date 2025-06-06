@@ -1,75 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Joydeep Das - Personal Webpage</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0 20px 40px 20px;
+    background: #d8e3ec; /* updated muted blue background */
+    color: #222;
+  }
+  header {
+    text-align: center;
+    padding: 40px 20px 30px 20px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #333;
+  }
+  .top-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+    background: #fff;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    border-radius: 10px;
+    padding: 30px;
+  }
+  .professional-summary {
+    flex: 1 1 55%;
+    min-width: 280px;
+    padding-right: 20px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #444;
+  }
+  .professional-summary p {
+    text-align: justify;
+  }
+  /* Professional Summary header styled like Career Accomplishments */
+  .professional-summary h2 {
+    font-size: 1.8rem;
+    border-bottom: 2px solid #357edd;
+    padding-bottom: 6px;
+    color: #2c65d9;
+    margin-top: 0;
+  }
+  .photo-container {
+    flex: 1 1 35%;
+    min-width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .photo-container img {
+    max-width: 280px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.15);
+  }
+  section {
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  }
+  section h2 {
+    margin-top: 0;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #357edd;
+    padding-bottom: 6px;
+    color: #2c65d9;
+  }
+  .career-accomplishments p,
+  .career-accomplishments ul {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.6;
+    margin-top: 15px;
+    text-align: justify;
+  }
+  .career-accomplishments ul {
+    padding-left: 20px;
+  }
+  .career-accomplishments li {
+    margin-bottom: 12px;
+  }
+  .publications a,
+  .awards-membership a {
+    font-weight: 600;
+    color: #357edd;
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  .publications a:hover,
+  .publications a:focus,
+  .awards-membership a:hover,
+  .awards-membership a:focus {
+    text-decoration: underline;
+  }
+  .awards-membership ul {
+    padding-left: 20px;
+    margin-top: 15px;
+  }
+  .awards-membership li {
+    margin-bottom: 8px;
+  }
+  @media (max-width: 720px) {
+    .top-content {
+      flex-direction: column;
+    }
+    .professional-summary, .photo-container {
+      flex: 1 1 100%;
+      min-width: auto;
+      padding-right: 0;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    .photo-container img {
+      max-width: 250px;
+    }
+    .professional-summary p {
+      text-align: justify;
+      text-align-last: left;
+    }
+    .career-accomplishments p,
+    .career-accomplishments ul {
+      text-align: justify;
+      text-align-last: left;
+    }
+  }
+</style>
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+<header>Joydeep Das</header>
 
-    <!-- Hero Section -->
-    <section id="home">
-        <h1>Welcome to My Portfolio</h1>
-        <p>Hi, I'm [Your Name], a [Your Profession].</p>
-    </section>
+<div class="top-content">
+  <div class="professional-summary" aria-label="Professional Summary">
+    <h2>Professional Summary</h2>
+    <p>
+      Joydeep is results-driven Technical Product/Project Management professional with 20+ years of experience in leading cross-functional teams and overseeing complex data storage and compute platform hardware and systems software engineering projects. He has Strong background in technical project and product management, engineering development and product validation.
+    </p>
+  </div>
+  <div class="photo-container" aria-label="Photograph of Joydeep Das">
+    <img src="/joydeepdasprofile.github.io/docs/assets/Images/Joydeep_Das.jpeg" alt="Photo of Joydeep Das" />
+  </div>
+</div>
 
-    <!-- About Section -->
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Information about yourself.</p>
-    </section>
+<section aria-labelledby="career-accomplishments-title" class="career-accomplishments">
+  <h2 id="career-accomplishments-title">Career Accomplishments</h2>
+  <p>Over 20+ years of professional career, Joydeep has worked on several products to bring them from the ground up. These computer servers and data storage products are highly successful, having generated multi-billion-dollar revenue for the companies that utilize these platforms and software solutions. These platforms and software solutions have helped private enterprises, local and federal governments in the USA, and across the world. Some of the notable products where Joydeep held a senior engineering position or served as a technical program or product manager are:</p>
+  <ul>
+    <li>Technical product/program management of Pure Storage Flash Array C20, Flash Array RC20 and Flash Blade EXA and BGP (Border Gateway Capability) feature release.</li>
+    <li>Led technical product/program management initiative to re-engineer OCI's Object Storage software stack from monolithic architecture to micro services, resulting in 20% faster deployment velocity across cloud regions.</li>
+    <li>Led technical product/program management of Oracle Cloud Infra File and Block Storage ARM Platform Adoption for AI workload, supporting GPU cluster.</li>
+    <li>Led technical product/program management of HPE Alletra 6000 and 5000.</li>
+    <li>Developed a completely new, ground-up Python and shell script-based HW NPI automation framework for Nimble Storage HW/Systems Software NPI lab and manufacturing factory flow.</li>
+    <li>Led hardware and platform engineering of Industry’s 1st "All NVMe" data storage platform at Cisco "Unified Computing Server" group.</li>
+  </ul>
+</section>
 
-    <!-- Skills Section -->
-    <section id="skills">
-        <h2>My Skills</h2>
-        <ul>
-            <li>Skill 1</li>
-            <li>Skill 2</li>
-            <li>Skill 3</li>
-        </ul>
-    </section>
+<section class="publications" aria-labelledby="publications-title">
+  <h2 id="publications-title">Publications</h2>
+  <p>
+    <a href="https://example.com/sample-publication.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open publication PDF in new tab">View Publication PDF</a>
+  </p>
+</section>
 
-    <!-- Projects Section -->
-    <section id="projects">
-        <h2>My Projects</h2>
-        <div class="project-grid">
-            <div class="project">
-                <img src="project1.jpg" alt="Project 1">
-                <h3>Project 1</h3>
-                <p>Description of Project 1.</p>
-            </div>
-            <div class="project">
-                <img src="project2.jpg" alt="Project 2">
-                <h3>Project 2</h3>
-                <p>Description of Project 2.</p>
-            </div>
-        </div>
-    </section>
+<section class="awards-membership" aria-labelledby="awards-membership-title">
+  <h2 id="awards-membership-title">Awards and Membership</h2>
+  <ul>
+    <li><a href="https://example.com/award1" target="_blank" rel="noopener noreferrer" aria-label="Open Award 1 in new tab">Award 1: Excellence in Product Management</a></li>
+    <li><a href="https://example.com/award2" target="_blank" rel="noopener noreferrer" aria-label="Open Award 2 in new tab">Award 2: Leadership in Engineering</a></li>
+    <li><a href="https://example.com/membership1" target="_blank" rel="noopener noreferrer" aria-label="Open Membership 1 in new tab">Member, IEEE</a></li>
+    <li><a href="https://example.com/membership2" target="_blank" rel="noopener noreferrer" aria-label="Open Membership 2 in new tab">Member, Project Management Institute</a></li>
+  </ul>
+</section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2>Get in Touch</h2>
-        <p>Contact information or a contact form.</p>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2023 Your Name</p>
-    </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
