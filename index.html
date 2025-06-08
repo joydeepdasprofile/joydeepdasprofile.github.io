@@ -5,29 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Joydeep Das - Personal Webpage</title>
 <style>
+  /* Professional color palette: neutral backgrounds and dark text */
   body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0 20px 40px 20px;
-    background: #d8e3ec; /* updated muted blue background */
-    color: #222;
+    background: #f8f9fa; /* very light gray */
+    color: #222222; /* dark charcoal */
   }
+  /* Fixed header container with links below the main header */
   header {
     text-align: center;
-    padding: 40px 20px 30px 20px;
+    padding: 40px 20px 10px 20px;
     font-size: 2.5rem;
-    font-weight: bold;
+    font-weight: 700;
     letter-spacing: 2px;
-    color: #333;
+    color: #2c3e50; /* dark blue-gray */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #f8f9fa;
+    z-index: 10000;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+  }
+  /* Container for the navigation links below header */
+  .header-nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    background: #ffffff;
+    padding: 12px 0 16px 0;
+    border-bottom: 2px solid #2980b9;
+    position: fixed;
+    top: 84px; /* header height (approx 80px) + some spacing */
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.05);
+  }
+  .header-nav a {
+    color: #2980b9;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .header-nav a:hover,
+  .header-nav a:focus {
+    background-color: #2980b9;
+    color: #ffffff;
+    outline: none;
+  }
+  /* Add spacing at top of main content to avoid being hidden under fixed header and nav */
+  main {
+    max-width: 900px;
+    margin: 140px auto 40px auto; /* enough top margin for header + nav */
   }
   .top-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    max-width: 900px;
-    margin: 0 auto 40px auto;
-    background: #fff;
-    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    background: #ffffff; /* pure white for content */
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.08);
     border-radius: 10px;
     padding: 30px;
   }
@@ -36,19 +78,19 @@
     min-width: 280px;
     padding-right: 20px;
     font-size: 1.1rem;
-    line-height: 1.5;
-    color: #444;
+    line-height: 1.6;
+    color: #4d4d4d; /* medium charcoal */
   }
   .professional-summary p {
     text-align: justify;
   }
-  /* Professional Summary header styled like Career Accomplishments */
   .professional-summary h2 {
-    font-size: 1.8rem;
-    border-bottom: 2px solid #357edd;
-    padding-bottom: 6px;
-    color: #2c65d9;
+    font-size: 1.85rem;
+    border-bottom: 2px solid #2980b9; /* professional blue */
+    padding-bottom: 8px;
+    color: #2980b9;
     margin-top: 0;
+    font-weight: 600;
   }
   .photo-container {
     flex: 1 1 35%;
@@ -61,58 +103,60 @@
     max-width: 280px;
     height: auto;
     border-radius: 10px;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.15);
+    box-shadow: 0 6px 20px rgb(0 0 0 / 0.12);
   }
   section {
-    max-width: 900px;
-    margin: 0 auto 40px auto;
-    background: #fff;
-    padding: 25px 30px;
+    background: #ffffff;
+    padding: 30px 35px;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.08);
+    margin-bottom: 40px;
   }
   section h2 {
     margin-top: 0;
-    font-size: 1.8rem;
-    border-bottom: 2px solid #357edd;
-    padding-bottom: 6px;
-    color: #2c65d9;
+    font-size: 1.85rem;
+    border-bottom: 3px solid #2980b9;
+    padding-bottom: 8px;
+    color: #2980b9;
+    font-weight: 700;
   }
   .career-accomplishments p,
   .career-accomplishments ul {
-    font-size: 1.1rem;
-    color: #444;
-    line-height: 1.6;
-    margin-top: 15px;
+    font-size: 1.15rem;
+    color: #4d4d4d;
+    line-height: 1.7;
+    margin-top: 18px;
     text-align: justify;
   }
   .career-accomplishments ul {
-    padding-left: 20px;
+    padding-left: 24px;
   }
   .career-accomplishments li {
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
   .publications a,
   .awards-membership a {
     font-weight: 600;
-    color: #357edd;
+    color: #2980b9;
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     display: inline-block;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
   .publications a:hover,
   .publications a:focus,
   .awards-membership a:hover,
   .awards-membership a:focus {
     text-decoration: underline;
+    color: #1e6091;
+    outline: none;
   }
   .awards-membership ul {
-    padding-left: 20px;
-    margin-top: 15px;
+    padding-left: 24px;
+    margin-top: 18px;
   }
   .awards-membership li {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
   @media (max-width: 720px) {
     .top-content {
@@ -122,11 +166,11 @@
       flex: 1 1 100%;
       min-width: auto;
       padding-right: 0;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
       text-align: center;
     }
     .photo-container img {
-      max-width: 250px;
+      max-width: 260px;
     }
     .professional-summary p {
       text-align: justify;
@@ -137,53 +181,137 @@
       text-align: justify;
       text-align-last: left;
     }
+    .header-nav {
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px 10px 16px 10px;
+    }
+    /* Adjust floating external links width & placement on smaller screens */
+    .floating-external-links {
+      position: fixed;
+      top: auto;
+      bottom: 10px;
+      left: 0;
+      width: 100%;
+      max-width: none;
+      padding: 10px;
+      border-radius: 0;
+      box-shadow: none;
+      flex-direction: row;
+      justify-content: center;
+      gap: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      white-space: nowrap;
+    }
+    .floating-external-links a {
+      font-size: 0.95rem;
+      text-overflow: clip;
+    }
+  }
+  /* Remove default focus outline and style focus more accessibly */
+  a:focus {
+    outline: 3px solid #2980b9;
+    outline-offset: 2px;
+  }
+
+  /* Fixed external links container on left, no float */
+  .floating-external-links {
+    position: fixed;
+    top: 33.3333vh; /* 1/3rd viewport height */
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 12px 20px;
+    border-top-right-radius: 14px;
+    border-bottom-right-radius: 14px;
+    box-shadow: 2px 4px 12px rgb(0 0 0 / 0.12);
+    z-index: 9999;
+    font-weight: 700;
+    font-size: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 300px; /* increased width for full text visibility */
+    white-space: nowrap; /* prevent line-break */
+  }
+  .floating-external-links a {
+    color: #2980b9;
+    text-decoration: none;
+    white-space: nowrap; /* no line breaks */
+    transition: color 0.3s ease;
+    padding-right: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .floating-external-links a:hover,
+  .floating-external-links a:focus {
+    text-decoration: underline;
+    color: #1e6091;
+    outline: none;
   }
 </style>
 </head>
 <body>
-<header>Joydeep Das</header>
+<header>
+  Joydeep Das
+</header>
+<nav class="header-nav" aria-label="Page section navigation">
+  <a href="#professional-summary">Professional Summary</a>
+  <a href="#career-accomplishments-title">Career Accomplishments</a>
+  <a href="#publications-title">Publications</a>
+  <a href="#awards-membership-title">Awards and Membership</a>
+</nav>
 
-<div class="top-content">
-  <div class="professional-summary" aria-label="Professional Summary">
-    <h2>Professional Summary</h2>
+<!-- Fixed external links on left side outside main content, no floating animation -->
+<nav class="floating-external-links" aria-label="External news and blogs links">
+  <a href="https://www.reuters.com/technology/artificial-intelligence/" target="_blank" rel="noopener noreferrer" aria-label="Latest News on Artificial Intelligence" title="Latest News on Artificial Intelligence">Latest News on Artificial Intelligence</a>
+  <a href="https://www.forbes.com/cloud-computing/" target="_blank" rel="noopener noreferrer" aria-label="Cloud Computing Trends" title="Cloud Computing Trends">Cloud Computing Trends</a>
+  <a href="https://www.greentechmedia.com/#:~:text=Greentech%20Media%20|%20Clean%20Tech%20&%20Renewable%20Energy%20News%20|%20Greentech%20Media." target="_blank" rel="noopener noreferrer" aria-label="Trending news on sustainable energy" title="Trending news on sustainable energy">Trending news on sustainable energy</a>
+  <a href="https://joydeepdasblogs.example.com" target="_blank" rel="noopener noreferrer" aria-label="Joydeep's Personal Blogs" title="Joydeep's Personal Blogs">Joydeep's Personal Blogs</a>
+</nav>
+
+<main>
+  <div class="top-content">
+    <div class="professional-summary" aria-label="Professional Summary">
+      <h2 id="professional-summary">Professional Summary</h2>
+      <p>
+        Joydeep is results-driven Technical Product/Project Management professional with 20+ years of experience in leading cross-functional teams and overseeing complex data storage and compute platform hardware and systems software engineering projects. He has Strong background in technical project and product management, engineering development and product validation.
+      </p>
+    </div>
+    <div class="photo-container" aria-label="Photograph of Joydeep Das">
+      <img src="https://i.pravatar.cc/280?img=12" alt="Photo of Joydeep Das" />
+    </div>
+  </div>
+
+  <section aria-labelledby="career-accomplishments-title" class="career-accomplishments">
+    <h2 id="career-accomplishments-title">Career Accomplishments</h2>
+    <p>Over 20+ years of professional career, Joydeep has worked on several products to bring them from the ground up. These computer servers and data storage products are highly successful, having generated multi-billion-dollar revenue for the companies that utilize these platforms and software solutions. These platforms and software solutions have helped private enterprises, local and federal governments in the USA, and across the world. Some of the notable products where Joydeep held a senior engineering position or served as a technical program or product manager are:</p>
+    <ul>
+      <li>Technical product/program management of Pure Storage Flash Array C20, Flash Array RC20 and Flash Blade EXA and BGP (Border Gateway Capability) feature release.</li>
+      <li>Led technical product/program management initiative to re-engineer OCI's Object Storage software stack from monolithic architecture to micro services, resulting in 20% faster deployment velocity across cloud regions.</li>
+      <li>Led technical product/program management of Oracle Cloud Infra File and Block Storage ARM Platform Adoption for AI workload, supporting GPU cluster.</li>
+      <li>Led technical product/program management of HPE Alletra 6000 and 5000.</li>
+      <li>Developed a completely new, ground-up Python and shell script-based HW NPI automation framework for Nimble Storage HW/Systems Software NPI lab and manufacturing factory flow.</li>
+      <li>Led hardware and platform engineering of Industry’s 1st "All NVMe" data storage platform at Cisco "Unified Computing Server" group.</li>
+    </ul>
+  </section>
+
+  <section class="publications" aria-labelledby="publications-title">
+    <h2 id="publications-title">Publications</h2>
     <p>
-      Joydeep is results-driven Technical Product/Project Management professional with 20+ years of experience in leading cross-functional teams and overseeing complex data storage and compute platform hardware and systems software engineering projects. He has Strong background in technical project and product management, engineering development and product validation.
+      <a href="https://example.com/sample-publication.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open publication PDF in new tab">View Publication PDF</a>
     </p>
-  </div>
-  <div class="photo-container" aria-label="Photograph of Joydeep Das">
-    <img src="/joydeepdasprofile.github.io/tree/main/docs/assets/ImagesImages/Joydeep_Das.jpeg" alt="Photo of Joydeep Das" />
-  </div>
-</div>
+  </section>
 
-<section aria-labelledby="career-accomplishments-title" class="career-accomplishments">
-  <h2 id="career-accomplishments-title">Career Accomplishments</h2>
-  <p>Over 20+ years of professional career, Joydeep has worked on several products to bring them from the ground up. These computer servers and data storage products are highly successful, having generated multi-billion-dollar revenue for the companies that utilize these platforms and software solutions. These platforms and software solutions have helped private enterprises, local and federal governments in the USA, and across the world. Some of the notable products where Joydeep held a senior engineering position or served as a technical program or product manager are:</p>
-  <ul>
-    <li>Technical product/program management of Pure Storage Flash Array C20, Flash Array RC20 and Flash Blade EXA and BGP (Border Gateway Capability) feature release.</li>
-    <li>Led technical product/program management initiative to re-engineer OCI's Object Storage software stack from monolithic architecture to micro services, resulting in 20% faster deployment velocity across cloud regions.</li>
-    <li>Led technical product/program management of Oracle Cloud Infra File and Block Storage ARM Platform Adoption for AI workload, supporting GPU cluster.</li>
-    <li>Led technical product/program management of HPE Alletra 6000 and 5000.</li>
-    <li>Developed a completely new, ground-up Python and shell script-based HW NPI automation framework for Nimble Storage HW/Systems Software NPI lab and manufacturing factory flow.</li>
-    <li>Led hardware and platform engineering of Industry’s 1st "All NVMe" data storage platform at Cisco "Unified Computing Server" group.</li>
-  </ul>
-</section>
-
-<section class="publications" aria-labelledby="publications-title">
-  <h2 id="publications-title">Publications</h2>
-  <p>
-    <a href="https://example.com/sample-publication.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open publication PDF in new tab">View Publication PDF</a>
-  </p>
-</section>
-
-<section class="awards-membership" aria-labelledby="awards-membership-title">
-  <h2 id="awards-membership-title">Awards and Membership</h2>
-  <ul>
-    <li><a href="https://example.com/award1" target="_blank" rel="noopener noreferrer" aria-label="Open Award 1 in new tab">Award 1: Excellence in Product Management</a></li>
-    <li><a href="https://example.com/award2" target="_blank" rel="noopener noreferrer" aria-label="Open Award 2 in new tab">Award 2: Leadership in Engineering</a></li>
-    <li><a href="https://example.com/membership1" target="_blank" rel="noopener noreferrer" aria-label="Open Membership 1 in new tab">Member, IEEE</a></li>
-    <li><a href="https://example.com/membership2" target="_blank" rel="noopener noreferrer" aria-label="Open Membership 2 in new tab">Member, Project Management Institute</a></li>
-  </ul>
-</section>
-
+  <section class="awards-membership" aria-labelledby="awards-membership-title">
+    <h2 id="awards-membership-title">Awards and Membership</h2>
+    <ul>
+      <li><a href="https://example.com/award1" target="_blank" rel="noopener noreferrer" aria-label="Open Award 1 in new tab">Award 1: Excellence in Product Management</a></li>
+      <li><a href="https://example.com/award2" target="_blank" rel="noopener noreferrer" aria-label="Open Award 2 in new tab">Award 2: Leadership in Engineering</a></li>
+      <li><a href="https://example.com/membership1" target="_blank" rel="noopener noreferrer" aria-label="Open Membership 1 in new tab">Member, IEEE</a></li>
+      <li><a href="https://example.com/membership2" target="_blank" rel="noopener noreferrer" aria-label="Open Membership 2 in new tab">Member, Project Management Institute</a></li>
+    </ul>
+  </section>
+</main>
 </body>
 </html>
