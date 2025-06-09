@@ -1,239 +1,286 @@
-import React, { useEffect, useState } from "react";
-
-const TOPICS = [
-  "Artificial Intelligence",
-  "Clean Energy",
-  "Liquid Cooling Technology",
-  "Systems Design Interview Tips",
-];
-
-const TILE_COUNT = 20;
-
-const tileStyle = {
-  boxSizing: "border-box",
-  border: "1px solid #ddd",
-  borderRadius: "8px",
-  padding: "16px",
-  backgroundColor: "#fff",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
-  cursor: "pointer",
-  transition: "box-shadow 0.2s ease",
-  overflow: "hidden",
-};
-
-const tileHoverStyle = {
-  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-};
-
-const gridStyle = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fill,minmax(280px,1fr))",
-  gap: "20px",
-  padding: "20px",
-  backgroundColor: "#f5f7fa",
-  minHeight: "100vh",
-};
-
-const BlogPage = () => {
-  const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [hoverTile, setHoverTile] = useState(null);
-
-  useEffect(() => {
-    async function fetchArticles() {
-      setLoading(true);
-      setError(null);
-      try {
-        // Use the provided multi-fetch API for efficiency
-        const res = await fetch("/api/articles/multi-fetch", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            topics: TOPICS,
-            limit: TILE_COUNT,
-            sort: "latest",
-          }),
-        });
-        if (!res.ok) throw new Error(`API error: ${res.statusText}`);
-        const data = await res.json();
-
-        // data.articles is assumed to be an array of articles
-        // We need exactly 20 tiles total mixing news from all topics top rated.
-        // Sort articles by rating or relevance if available, or just latest as fallback
-
-        // To mix topics fairly, we can first group articles by topic,
-        // then pick top N from each topic until 20 tiles reached
-
-        // But no rating field described, so we assume data.articles already filtered top-rated latest.
-
-        // We'll shuffle and slice to 20
-        function shuffleArray(arr) {
-          let array = arr.slice();
-          for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-          }
-          return array;
-        }
-
-        const shuffledArticles = shuffleArray(data.articles);
-        setArticles(shuffledArticles.slice(0, TILE_COUNT));
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Systems Design Interview Tips - Expert Blog</title>
+  <style>
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9fafc;
+      color: #212529;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      color: #1a73e8;
+      text-decoration: none;
+      transition: color 0.2s ease-in-out;
+    }
+    a:hover, a:focus {
+      color: #0046c3;
+      outline: none;
+      text-decoration: underline;
+    }
+    /* Header */
+    header {
+      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+      color: #eaf1f8;
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 0.05em;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      user-select: none;
+    }
+    /* Main container */
+    main {
+      max-width: 1200px;
+      width: 90%;
+      margin: 2rem auto 3rem;
+      flex-grow: 1;
+    }
+    main > h1 {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+      color: #0c2340;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-bottom: 3px solid #1a73e8;
+      padding-bottom: 0.5rem;
+      user-select: none;
+    }
+    /* Articles Grid */
+    #articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.8rem 2rem;
+      margin-top: 2rem;
+    }
+    /* Each Tile */
+    .tile {
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow:
+        0 1px 3px rgba(0,0,0,0.12),
+        0 4px 8px rgba(0,0,0,0.08);
+      padding: 1.8rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease, transform 0.25s ease;
+      outline-offset: 3px;
+      position: relative;
+      user-select: none;
+      min-height: 260px;
+    }
+    .tile:focus,
+    .tile:hover {
+      box-shadow:
+        0 6px 18px rgba(26, 115, 232, 0.4),
+        0 10px 20px rgba(0, 0, 0, 0.2);
+      transform: translateY(-4px);
+      outline: none;
+    }
+    .tile h2 {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin: 0 0 1rem 0;
+      color: #0b1f41;
+      line-height: 1.3;
+      text-rendering: optimizeLegibility;
+    }
+    .tile p {
+      flex-grow: 1;
+      font-size: 1rem;
+      color: #444d58;
+      margin: 0 0 1.5rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.4;
+    }
+    .tile footer {
+      font-size: 0.85rem;
+      color: #6c757d;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-style: normal;
+      user-select: text;
+      border-top: 1px solid #e9ecef;
+      padding-top: 0.8rem;
+    }
+    .tile footer time {
+      color: #adb5bd;
+      font-variant-numeric: tabular-nums;
+    }
+    /* Loading and error messages */
+    .loading,
+    .error {
+      font-size: 1.4rem;
+      text-align: center;
+      color: #6c757d;
+      margin-top: 8rem;
+      user-select: none;
+    }
+    .error {
+      color: #dc3545;
+      font-weight: 600;
+    }
+    /* Footer */
+    footer.page-footer {
+      background-color: #0f2027;
+      background-image: linear-gradient(90deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+      color: #adb5bd;
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 1rem 0 2rem;
+      user-select: none;
+      box-shadow: inset 0 1px 4px rgba(255,255,255,0.1);
+      letter-spacing: 0.02em;
+    }
+    /* Responsive text adjustments */
+    @media (max-width: 480px) {
+      header {
+        font-size: 1.8rem;
+        padding-top: 2rem;
+      }
+      main > h1 {
+        font-size: 1.75rem;
+      }
+      .tile {
+        padding: 1.4rem 1.6rem 1.6rem;
+        min-height: 280px;
+      }
+      .tile p {
+        -webkit-line-clamp: 8;
       }
     }
-    fetchArticles();
-  }, []);
+  </style>
+</head>
+<body>
+  <header>Systems Design Interview Tips - Expert Blog</header>
+  <main>
+    <h1>Systems Design Interview Tips</h1>
+    <section id="articles-grid" role="list" aria-label="Systems Design Interview Tips Articles">
+      <!-- Article tiles go here -->
+    </section>
+    <div id="loading" class="loading" aria-live="polite">Loading articles...</div>
+    <div id="error" class="error" role="alert" hidden></div>
+  </main>
+  <footer class="page-footer">
+    © 2024 Expert Blog • News sourced from igotanoffer.com and other trustworthy tech sources.
+  </footer>
 
-  if (loading)
-    return (
-      <div
-        style={{
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          fontSize: "1.5rem",
-          color: "#444",
-        }}
-        aria-live="polite"
-      >
-        Loading top-rated news...
-      </div>
-    );
+  <script>
+    (function () {
+      const API_URL = "/api/articles?topic=Systems%20Design%20Interview%20Tips&limit=20&sort=latest";
 
-  if (error)
-    return (
-      <div
-        role="alert"
-        style={{
-          padding: "20px",
-          color: "white",
-          backgroundColor: "#b00020",
-          textAlign: "center",
-          fontSize: "1.2rem",
-        }}
-      >
-        Failed to load news: {error}
-      </div>
-    );
+      const articlesGrid = document.getElementById("articles-grid");
+      const loadingElem = document.getElementById("loading");
+      const errorElem = document.getElementById("error");
 
-  return (
-    <>
-      <header
-        style={{
-          padding: "24px 20px",
-          backgroundColor: "#222",
-          color: "#fff",
-          fontSize: "1.8rem",
-          fontWeight: "600",
-          textAlign: "center",
-          userSelect: "none",
-        }}
-      >
-        Top-Rated News on AI, Clean Energy, Liquid Cooling & Systems Design Tips
-      </header>
-      <main style={gridStyle} role="list" aria-label="Top rated news articles">
-        {articles.length === 0 && (
-          <p
-            style={{
-              gridColumn: "1/-1",
-              textAlign: "center",
-              color: "#666",
-            }}
-          >
-            No news articles found.
-          </p>
-        )}
-        {articles.map((article, i) => (
-          <article
-            key={`${article.id || i}`}
-            role="listitem"
-            tabIndex={0}
-            aria-label={`${article.title} - Topic: ${
-              article.topic || "General"
-            }`}
-            onMouseEnter={() => setHoverTile(i)}
-            onMouseLeave={() => setHoverTile(null)}
-            onClick={() => {
-              if (article.url) window.open(article.url, "_blank", "noopener");
-            }}
-            onKeyPress={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                if (article.url) window.open(article.url, "_blank", "noopener");
-              }
-            }}
-            style={{
-              ...tileStyle,
-              ...(hoverTile === i ? tileHoverStyle : {}),
-            }}
-          >
-            <h2
-              style={{
-                fontSize: "1.15rem",
-                marginBottom: "0.35rem",
-                color: "#0c2340",
-              }}
-            >
-              {article.title}
-            </h2>
-            <p
-              style={{
-                color: "#4a4a4a",
-                fontSize: "0.9rem",
-                flexGrow: 1,
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                display: "-webkit-box",
-                WebkitLineClamp: 5,
-                WebkitBoxOrient: "vertical",
-              }}
-            >
-              {article.description || article.summary || "No description available."}
-            </p>
-            <footer
-              style={{
-                marginTop: "12px",
-                fontSize: "0.8rem",
-                color: "#888",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <span>{article.source || "Unknown source"}</span>
-              {article.publishedAt && (
-                <time dateTime={new Date(article.publishedAt).toISOString()}>
-                  {new Date(article.publishedAt).toLocaleDateString(undefined, {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </time>
-              )}
-            </footer>
-          </article>
-        ))}
-      </main>
-      <footer
-        style={{
-          padding: "16px 20px",
-          textAlign: "center",
-          fontSize: "0.9rem",
-          color: "#555",
-          backgroundColor: "#f0f0f0",
-          userSelect: "none",
-        }}
-      >
-        News sourced from kdnuggets.com, renewableenergyworld.com, datacenterfrontier.com, igotanoffer.com
-      </footer>
-    </>
-  );
-};
+      function createArticleTile(article) {
+        const articleEl = document.createElement("article");
+        articleEl.className = "tile";
+        articleEl.setAttribute("tabindex", "0");
+        articleEl.setAttribute("role", "listitem");
+        articleEl.setAttribute(
+          "aria-label",
+          `${article.title} - Source: ${article.source || "Unknown"}`
+        );
 
-export default BlogPage;
+        articleEl.addEventListener("click", () => {
+          if (article.url) window.open(article.url, "_blank", "noopener,noreferrer");
+        });
+        articleEl.addEventListener("keypress", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            if (article.url) window.open(article.url, "_blank", "noopener,noreferrer");
+          }
+        });
+
+        const title = document.createElement("h2");
+        title.textContent = article.title || "No title available";
+
+        const desc = document.createElement("p");
+        desc.textContent =
+          article.description ||
+          article.summary ||
+          "No description provided for this article.";
+
+        const footer = document.createElement("footer");
+
+        const sourceSpan = document.createElement("span");
+        sourceSpan.textContent = article.source || "Unknown source";
+
+        footer.appendChild(sourceSpan);
+
+        if (article.publishedAt) {
+          const timeElem = document.createElement("time");
+          const date = new Date(article.publishedAt);
+          timeElem.setAttribute("datetime", date.toISOString());
+          timeElem.textContent = date.toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          });
+          footer.appendChild(timeElem);
+        }
+
+        articleEl.appendChild(title);
+        articleEl.appendChild(desc);
+        articleEl.appendChild(footer);
+
+        return articleEl;
+      }
+
+      async function fetchArticles() {
+        loadingElem.hidden = false;
+        errorElem.hidden = true;
+        try {
+          const res = await fetch(API_URL, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          });
+          if (!res.ok) throw new Error(`Failed to fetch articles: ${res.statusText}`);
+          const data = await res.json();
+
+          const articles = data.articles || [];
+          if (articles.length === 0) {
+            loadingElem.textContent = "No articles found.";
+            return;
+          }
+
+          loadingElem.hidden = true;
+          articlesGrid.innerHTML = "";
+          articles.forEach((article) => {
+            articlesGrid.appendChild(createArticleTile(article));
+          });
+        } catch (err) {
+          loadingElem.hidden = true;
+          errorElem.textContent = err.message || "Error loading articles.";
+          errorElem.hidden = false;
+        }
+      }
+
+      fetchArticles();
+    })();
+  </script>
+</body>
+</html>
