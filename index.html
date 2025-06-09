@@ -300,10 +300,10 @@
     <h2 id="publications-title">Publications</h2>
     <p>
       <li><a href="https://ijcttjournal.org/archives/ijctt-v73i5p116" target="_blank" rel="noopener noreferrer" aria-label="Solid State Drive: Opportunity, Method, and Apparatus to Address Artificial Intelligence Infrastructure">Solid State Drive: Opportunity, Method, and Apparatus to Address Artificial Intelligence Infrastructuren</a></li>
-      <li><a href="/papers/Techcon-2020-Computational-Storage.pdf" target="_blank" rel="noopener noreferrer" aria-label="Computational Storage - Reference Platform Architecture">Computational Storage - Reference Platform Architecture</a></li>
+      <li><a href="/papers/Techcon-2020-Computational-Storage.pdf" target="_blank" rel="noopener noreferrer" aria-label="Computational Storage - Reference Platform Architecture" onclick="event.preventDefault(); openPDFView(this.href);">Computational Storage - Reference Platform Architecture</a></li>
     </p>
   </section>
-
+  
   <section class="awards-membership" aria-labelledby="awards-membership-title">
     <h2 id="awards-membership-title">Awards and Membership</h2>
     <ul>
@@ -314,5 +314,18 @@
     </ul>
   </section>
 </main>
+
+<script>
+  function openPDFView(url) {
+    // Open PDF in a new tab with headers set to disable download and print
+    // Since we cannot control server headers here, use a PDF viewer online that blocks downloads, e.g. Google Docs Viewer or Mozilla PDF.js viewer.
+    // We'll use Mozilla PDF.js hosted via 'https://mozilla.github.io/pdf.js/web/viewer.html?file=' + encoded URL
+    const pdfViewerBase = 'https://mozilla.github.io/pdf.js/web/viewer.html?file=';
+    const viewerUrl = pdfViewerBase + encodeURIComponent(url);
+    window.open(viewerUrl, '_blank', 'noopener');
+  }
+
+</script>
+
 </body>
 </html>
