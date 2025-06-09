@@ -1,1 +1,239 @@
+import React, { useEffect, useState } from "react";
 
+const TOPICS = [
+  "Artificial Intelligence",
+  "Clean Energy",
+  "Liquid Cooling Technology",
+  "Systems Design Interview Tips",
+];
+
+const TILE_COUNT = 20;
+
+const tileStyle = {
+  boxSizing: "border-box",
+  border: "1px solid #ddd",
+  borderRadius: "8px",
+  padding: "16px",
+  backgroundColor: "#fff",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  cursor: "pointer",
+  transition: "box-shadow 0.2s ease",
+  overflow: "hidden",
+};
+
+const tileHoverStyle = {
+  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+};
+
+const gridStyle = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fill,minmax(280px,1fr))",
+  gap: "20px",
+  padding: "20px",
+  backgroundColor: "#f5f7fa",
+  minHeight: "100vh",
+};
+
+const BlogPage = () => {
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [hoverTile, setHoverTile] = useState(null);
+
+  useEffect(() => {
+    async function fetchArticles() {
+      setLoading(true);
+      setError(null);
+      try {
+        // Use the provided multi-fetch API for efficiency
+        const res = await fetch("/api/articles/multi-fetch", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            topics: TOPICS,
+            limit: TILE_COUNT,
+            sort: "latest",
+          }),
+        });
+        if (!res.ok) throw new Error(`API error: ${res.statusText}`);
+        const data = await res.json();
+
+        // data.articles is assumed to be an array of articles
+        // We need exactly 20 tiles total mixing news from all topics top rated.
+        // Sort articles by rating or relevance if available, or just latest as fallback
+
+        // To mix topics fairly, we can first group articles by topic,
+        // then pick top N from each topic until 20 tiles reached
+
+        // But no rating field described, so we assume data.articles already filtered top-rated latest.
+
+        // We'll shuffle and slice to 20
+        function shuffleArray(arr) {
+          let array = arr.slice();
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+
+        const shuffledArticles = shuffleArray(data.articles);
+        setArticles(shuffledArticles.slice(0, TILE_COUNT));
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchArticles();
+  }, []);
+
+  if (loading)
+    return (
+      <div
+        style={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          fontSize: "1.5rem",
+          color: "#444",
+        }}
+        aria-live="polite"
+      >
+        Loading top-rated news...
+      </div>
+    );
+
+  if (error)
+    return (
+      <div
+        role="alert"
+        style={{
+          padding: "20px",
+          color: "white",
+          backgroundColor: "#b00020",
+          textAlign: "center",
+          fontSize: "1.2rem",
+        }}
+      >
+        Failed to load news: {error}
+      </div>
+    );
+
+  return (
+    <>
+      <header
+        style={{
+          padding: "24px 20px",
+          backgroundColor: "#222",
+          color: "#fff",
+          fontSize: "1.8rem",
+          fontWeight: "600",
+          textAlign: "center",
+          userSelect: "none",
+        }}
+      >
+        Top-Rated News on AI, Clean Energy, Liquid Cooling & Systems Design Tips
+      </header>
+      <main style={gridStyle} role="list" aria-label="Top rated news articles">
+        {articles.length === 0 && (
+          <p
+            style={{
+              gridColumn: "1/-1",
+              textAlign: "center",
+              color: "#666",
+            }}
+          >
+            No news articles found.
+          </p>
+        )}
+        {articles.map((article, i) => (
+          <article
+            key={`${article.id || i}`}
+            role="listitem"
+            tabIndex={0}
+            aria-label={`${article.title} - Topic: ${
+              article.topic || "General"
+            }`}
+            onMouseEnter={() => setHoverTile(i)}
+            onMouseLeave={() => setHoverTile(null)}
+            onClick={() => {
+              if (article.url) window.open(article.url, "_blank", "noopener");
+            }}
+            onKeyPress={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                if (article.url) window.open(article.url, "_blank", "noopener");
+              }
+            }}
+            style={{
+              ...tileStyle,
+              ...(hoverTile === i ? tileHoverStyle : {}),
+            }}
+          >
+            <h2
+              style={{
+                fontSize: "1.15rem",
+                marginBottom: "0.35rem",
+                color: "#0c2340",
+              }}
+            >
+              {article.title}
+            </h2>
+            <p
+              style={{
+                color: "#4a4a4a",
+                fontSize: "0.9rem",
+                flexGrow: 1,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                display: "-webkit-box",
+                WebkitLineClamp: 5,
+                WebkitBoxOrient: "vertical",
+              }}
+            >
+              {article.description || article.summary || "No description available."}
+            </p>
+            <footer
+              style={{
+                marginTop: "12px",
+                fontSize: "0.8rem",
+                color: "#888",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <span>{article.source || "Unknown source"}</span>
+              {article.publishedAt && (
+                <time dateTime={new Date(article.publishedAt).toISOString()}>
+                  {new Date(article.publishedAt).toLocaleDateString(undefined, {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </time>
+              )}
+            </footer>
+          </article>
+        ))}
+      </main>
+      <footer
+        style={{
+          padding: "16px 20px",
+          textAlign: "center",
+          fontSize: "0.9rem",
+          color: "#555",
+          backgroundColor: "#f0f0f0",
+          userSelect: "none",
+        }}
+      >
+        News sourced from kdnuggets.com, renewableenergyworld.com, datacenterfrontier.com, igotanoffer.com
+      </footer>
+    </>
+  );
+};
+
+export default BlogPage;
